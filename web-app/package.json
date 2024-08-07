@@ -1,0 +1,37 @@
+{
+  "name": "web-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "graphql-codegen": "graphql-codegen --config graphql-codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.7",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@mui/system": "^5.15.20",
+    "@mui/x-charts": "^7.7.0",
+    "graphql": "^16.8.1",
+    "next": "latest",
+    "notistack": "^3.0.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-simple-maps": "^3.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/react-simple-maps": "^3.0.4",
+    "babel-plugin-styled-components": "^2.1.4",
+    "typescript": "latest"
+  }
+}
