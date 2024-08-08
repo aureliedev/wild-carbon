@@ -12,7 +12,7 @@ import PieChartRidesEmissions from "./charts/PieChartRidesEmissions";
 import { CO2_KG_UNIT_LABEL } from "@/charts.constants";
 
 interface RidesCounterDateComparatorProps {
-  data: SearchRidesQuery;
+  data: SearchRidesQuery | undefined;
   currentRides: RideData[];
   month: number;
   year: number;
@@ -20,34 +20,40 @@ interface RidesCounterDateComparatorProps {
 
 const RidesCounterDateComparator = ({
   data,
-  currentRides,
+  currentRides = [],
   month,
   year,
 }: RidesCounterDateComparatorProps) => {
-  const prevRides = useMemo(
-    () =>
-      data.searchRides.filter((ride) =>
-        month === 0
-          ? checkRideMonthAndYearEquality(ride.date, 11, year - 1)
-          : checkRideMonthAndYearEquality(ride.date, month - 1, year)
-      ),
-    [currentRides]
-  );
+  const prevRides = useMemo(() => {
+    if (!data || !data.searchRides) {
+      return [];
+    }
+    return data.searchRides.filter((ride) =>
+      month === 0
+        ? checkRideMonthAndYearEquality(ride.date, 11, year - 1)
+        : checkRideMonthAndYearEquality(ride.date, month - 1, year)
+    );
+  }, [data, month, year]);
 
-  const nextRides = useMemo(
-    () =>
-      data.searchRides.filter((ride) =>
-        month === 11
-          ? checkRideMonthAndYearEquality(ride.date, 0, year + 1)
-          : checkRideMonthAndYearEquality(ride.date, month + 1, year)
-      ),
-    [currentRides]
-  );
+  const nextRides = useMemo(() => {
+    if (!data || !data.searchRides) {
+      return [];
+    }
+    return data.searchRides.filter((ride) =>
+      month === 11
+        ? checkRideMonthAndYearEquality(ride.date, 0, year + 1)
+        : checkRideMonthAndYearEquality(ride.date, month + 1, year)
+    );
+  }, [data, month, year]);
+
+  const baseElementLabel = getMonthWithId(month);
+  const prevElementLabel = month === 0 ? getMonthWithId(11) : getMonthWithId(month - 1);
+  const nextElementLabel = month === 11 ? getMonthWithId(0) : getMonthWithId(month + 1);
 
   return (
     <Comparator
       baseElement={{
-        label: getMonthWithId(month),
+        label: baseElementLabel,
         comparatedValues: [
           {
             label: "trajets",
@@ -61,7 +67,7 @@ const RidesCounterDateComparator = ({
       }}
       comparatedElements={[
         {
-          label: getMonthWithId(month - 1),
+          label: prevElementLabel,
           comparatedValues: [
             {
               label: "trajets",
@@ -76,7 +82,7 @@ const RidesCounterDateComparator = ({
           ],
         },
         {
-          label: getMonthWithId(month + 1),
+          label: nextElementLabel,
           comparatedValues: [
             {
               label: "trajets",

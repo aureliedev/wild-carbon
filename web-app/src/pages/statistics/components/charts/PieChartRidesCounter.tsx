@@ -8,13 +8,13 @@ import {
 import { RideData } from "@/type/RideData.type";
 
 interface PieChartRidesCounterProps {
-  rides: RideData[] | [];
+  rides: RideData[];
   width?: number;
   height?: number;
 }
 
 const PieChartRidesCounter = ({
-  rides,
+  rides = [],
   width,
   height,
 }: PieChartRidesCounterProps) => {

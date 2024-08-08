@@ -14,7 +14,7 @@ interface PieChartRidesEmissionsProps {
 }
 
 const PieChartRidesEmissions = ({
-  rides,
+  rides = [],
   width,
   height,
 }: PieChartRidesEmissionsProps) => {

@@ -29,7 +29,7 @@ const StatCard = ({ value, label, pieChart }: StatCardProps) => {
           color="inherit"
           sx={{ transition: "color ease .2s" }}
         >
-          {label.toUpperCase()}
+          {label ? label.toUpperCase() : ""}
         </Typography>
       </Stack>
     </Stack>

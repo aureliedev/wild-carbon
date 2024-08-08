@@ -12,13 +12,17 @@ import { getAllMonthsEmissionsByYearAndTransportation } from "@/utils/ride.utils
 import { useMemo } from "react";
 
 interface LineChartYearEmissionsProps {
-  data: SearchRidesQuery;
+  data: SearchRidesQuery | undefined;
 }
 
 const LineChartYearEmissions = ({ data }: LineChartYearEmissionsProps) => {
   const currentYear = new Date().getFullYear();
 
   const series = useMemo(() => {
+    if (!data || !data.searchRides) {
+      return [];
+    }
+
     const trainEmissions = getAllMonthsEmissionsByYearAndTransportation(
       data,
       currentYear,
@@ -77,7 +81,7 @@ const LineChartYearEmissions = ({ data }: LineChartYearEmissionsProps) => {
         showMark: ({ index }: { index: number }) => planeEmissions[index] > 0,
       },
     ];
-  }, [data]);
+  }, [data, currentYear]);
 
   return (
     <BaseLineChart
