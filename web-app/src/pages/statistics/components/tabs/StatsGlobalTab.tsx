@@ -1,12 +1,10 @@
 import { getNumberFormatedToTwoDecimals } from "@/utils/maths.utils";
 import { Grid, Typography } from "@mui/material";
-
 import { SearchRidesQuery } from "@/gql/graphql";
 import { useMemo } from "react";
 import PieChartRidesCounter from "../charts/PieChartRidesCounter";
 import PieChartRidesEmissions from "../charts/PieChartRidesEmissions";
 import LineChartYearEmissions from "../charts/LineChartYearEmissions";
-
 import StatCard from "../StatCard";
 import { getTotalEmissions } from "@/utils/ride.utils";
 import { CO2_KG_UNIT_LABEL } from "@/charts.constants";
@@ -17,12 +15,12 @@ interface StatsGlobalTabProps {
 
 const StatsGlobalTab = ({ data }: StatsGlobalTabProps) => {
   const totalRides = useMemo(
-    () => (data && data.searchRides.length > 0 ? data.searchRides.length : 0),
+    () => (data && data.searchRides && data.searchRides.length > 0 ? data.searchRides.length : 0),
     [data]
   );
 
   const totalCO2 = useMemo(() => {
-    return data && data.searchRides.length > 0
+    return data && data.searchRides && data.searchRides.length > 0
       ? getTotalEmissions(data.searchRides)
       : 0;
   }, [data]);
@@ -46,11 +44,13 @@ const StatsGlobalTab = ({ data }: StatsGlobalTabProps) => {
               value={totalRides}
               label="trajets"
               pieChart={
-                <PieChartRidesCounter
-                  rides={data.searchRides}
-                  width={200}
-                  height={200}
-                />
+                data && data.searchRides ? (
+                  <PieChartRidesCounter
+                    rides={data.searchRides}
+                    width={200}
+                    height={200}
+                  />
+                ) : null
               }
             />
           </Grid>
@@ -59,17 +59,21 @@ const StatsGlobalTab = ({ data }: StatsGlobalTabProps) => {
               value={getNumberFormatedToTwoDecimals(totalCO2)}
               label={CO2_KG_UNIT_LABEL}
               pieChart={
-                <PieChartRidesEmissions
-                  rides={data.searchRides}
-                  width={200}
-                  height={200}
-                />
+                data && data.searchRides ? (
+                  <PieChartRidesEmissions
+                    rides={data.searchRides}
+                    width={200}
+                    height={200}
+                  />
+                ) : null
               }
             />
           </Grid>
         </Grid>
         <Grid container item xs={12} md={8} alignItems="flex-end">
-          <LineChartYearEmissions data={data} />
+          {data && data.searchRides ? (
+            <LineChartYearEmissions data={data} />
+          ) : null}
         </Grid>
       </Grid>
     </Grid>

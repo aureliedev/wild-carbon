@@ -64,7 +64,7 @@ const StatisticsPage = () => {
           </Stack>
         }
         rightChildren={
-          <LegendContainer elements={STATISTICS_LEGEND_ELEMENTS} />
+          <LegendContainer elements={STATISTICS_LEGEND_ELEMENTS} justifyContent={""} />
         }
       />
 

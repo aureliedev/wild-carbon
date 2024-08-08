@@ -3,9 +3,7 @@ import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import DirectionsRailwayIcon from "@mui/icons-material/DirectionsRailway";
 import FlightIcon from "@mui/icons-material/Flight";
-
 import LabelIcon from "@mui/icons-material/Label";
-
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Stack } from "@mui/system";
 import { getFormatedDate } from "@/utils/date.utils";
@@ -50,9 +48,14 @@ const RideCard = ({ ride, handleDeleteRide }: RideCardProps) => {
           color: PLANE_COLOR_CODE,
         };
       default:
-        return;
+        return {};
     }
   };
+
+  // S'assurer que les informations sur le trajet et le transport sont définies
+  if (!ride || !ride.transportation) {
+    return null; // ou retourner une UI de remplacement
+  }
 
   const cardTransportationInfos = getCardTransportationInfos(
     ride.transportation.label
