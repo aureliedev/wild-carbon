@@ -6,8 +6,8 @@ import { DocumentNode } from 'graphql';
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { GET_TRANSPORTATIONS } from '@/api-gql/queries/transportation.queries';
 import { enqueueSnackbar } from 'notistack';
-import CreateRideForm from './CreateRideForm';
 import { CREATE_RIDE } from '@/api-gql/mutations/ride.mutations';
+import CreateRideForm from '@/pages/add-ride/components/CreateRideForm';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
