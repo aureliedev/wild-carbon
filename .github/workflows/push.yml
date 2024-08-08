@@ -10,7 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker-compose.ci.back-end.yml up --build --exit-code-from back-end
-
+  
+  ci-web-app:
+    name: Build and test web-app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker-compose.ci.web-app.yml up --build --exit-code-from web-app   
+       
   format-fix:
     name: Fix source code format with Prettier
     needs: ci-back-end
