@@ -1,7 +1,6 @@
 import Ride from "../entities/ride";
 import Transportation from "../entities/transportation";
 import User from "../entities/user";
-
 import casual from "casual";
 
 export async function createRides(length = 1, owner: User): Promise<void> {
