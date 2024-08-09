@@ -1,5 +1,3 @@
-import { css } from "styled-components";
-
 // Colors
 
 export const PRIMARY_COLOR = "#2a9d8f";
