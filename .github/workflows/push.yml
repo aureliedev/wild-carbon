@@ -1,8 +1,5 @@
-on:
-  push:
-    branches:
-      - develop
-      
+on: push
+
 permissions:
   contents: write
 
@@ -20,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker-compose.ci.web-app.yml up --build --exit-code-from web-app   
-
+       
   format-fix:
     name: Fix source code format with Prettier
     needs: ci-back-end
