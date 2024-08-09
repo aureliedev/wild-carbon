@@ -1,6 +1,7 @@
 import {
   Arg,
   Args,
+  Authorized,
   Ctx,
   ID,
   Mutation,
@@ -25,11 +26,13 @@ export function RideOwner() {
 
 @Resolver()
 export class RideResolver {
+  @Authorized()
   @Query(() => [Ride])
   rides() {
     return Ride.getRides();
   }
 
+  @Authorized()
   @Query(() => [Ride])
   searchRides(
     @Args(() => FilterRide) args: FilterRide,
@@ -38,16 +41,19 @@ export class RideResolver {
     return Ride.searchRides({ ...args, owner: user as User });
   }
 
+  @Authorized()
   @Query(() => Ride)
   ride(@Arg("id", () => ID) id: string) {
     return Ride.getRideById(id);
   }
 
+  @Authorized()
   @Mutation(() => Ride)
   createRide(@Args() args: CreateOrUpdateRide, @Ctx() { user }: Context) {
     return Ride.createRide({ ...args, owner: user as User });
   }
 
+  @Authorized()
   @RideOwner()
   @Mutation(() => Ride)
   updateRide(
@@ -57,6 +63,7 @@ export class RideResolver {
     return Ride.updateRide(id, args);
   }
 
+  @Authorized()
   @RideOwner()
   @Mutation(() => Ride)
   async deleteRide(@Arg("id", () => ID) id: string) {

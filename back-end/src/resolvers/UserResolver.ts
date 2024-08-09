@@ -34,6 +34,7 @@ export class UserResolver {
     return true;
   }
 
+  @Authorized()
   @Query(() => User)
   async getUserProfile(@Ctx() { user }: Context): Promise<User> {
     return user as User;
