@@ -12,6 +12,7 @@ import { UserResolver } from "./resolvers/UserResolver";
 import { createUser } from "./fixtures/user";
 import { createRides } from "./fixtures/ride";
 import { parse } from "cookie";
+import { getCache } from "./cache";
 
 export type Context = {
   req: Request;
@@ -46,6 +47,8 @@ const startApolloServer = async () => {
       return { req: req as Request, res: res as Response, user, userSessionId };
     },
   });
+
+  await getCache();
 
   await getDataSource();
 
