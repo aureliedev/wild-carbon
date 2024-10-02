@@ -96,7 +96,7 @@ const Header = () => {
               </MUILink>
 
               <MUILink component={Link} href="./" onClick={() => logout()}>
-                Log out
+                Se déconnecter
               </MUILink>
             </Stack>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -119,14 +119,14 @@ const Header = () => {
               variant="outlined"
               onClick={() => handleModalComponent(<SignInForm />)}
             >
-              Sign In
+              Se connecter
             </Button>
             <Button
               color="primary"
               variant="contained"
               onClick={() => handleModalComponent(<SignUpForm />)}
             >
-              Sign Up
+              S'inscrire
             </Button>
           </Stack>
         )}

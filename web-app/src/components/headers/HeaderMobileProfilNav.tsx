@@ -87,7 +87,7 @@ const HeaderMobileProfilNav = ({
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary="Log Out" />
+              <ListItemText primary="Se déconnecter" />
             </ListItemButton>
           </ListItem>
           <Divider />
